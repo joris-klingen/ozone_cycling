@@ -1,0 +1,25 @@
+\begingroup
+\centering
+\begin{tabular}{lccccccccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variables: & \multicolumn{3}{c}{mean\_speed} & \multicolumn{3}{c}{mean\_dist} & \multicolumn{3}{c}{log(n\_trips)}\\
+                & Speed (R)       & Speed (E)       & Speed (P)       & Dist (R)       & Dist (E)      & Dist (P)      & Trips (R)      & Trips (E)      & Trips (P) \\   
+   Model:       & (1)             & (2)             & (3)             & (4)            & (5)           & (6)           & (7)            & (8)            & (9)\\  
+   \midrule
+   \emph{Variables}\\
+   O3\_10       & -0.0520$^{***}$ & -0.0948$^{***}$ & -0.0978$^{***}$ & 0.0138$^{***}$ & -0.0043$^{*}$ & -0.0051$^{*}$ & 0.0369$^{***}$ & 0.0445$^{***}$ & 0.0418$^{***}$\\   
+                & (0.0158)        & (0.0105)        & (0.0125)        & (0.0039)       & (0.0025)      & (0.0031)      & (0.0075)       & (0.0044)       & (0.0051)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   date         & Yes             & Yes             & Yes             & Yes            & Yes           & Yes           & Yes            & Yes            & Yes\\  
+   dow\_hour    & Yes             & Yes             & Yes             & Yes            & Yes           & Yes           & Yes            & Yes            & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations & 28,696          & 76,467          & 47,771          & 28,696         & 76,467        & 47,771        & 28,696         & 76,467         & 47,771\\  
+   R$^2$        & 0.92337         & 0.92125         & 0.93082         & 0.89795        & 0.90812       & 0.90668       & 0.91025        & 0.91342        & 0.92554\\  
+   Within R$^2$ & 0.24886         & 0.18191         & 0.21406         & 0.05945        & 0.04547       & 0.04999       & 0.10810        & 0.11544        & 0.14481\\  
+   \midrule \midrule
+   \multicolumn{10}{l}{\emph{Clustered (date) standard-errors in parentheses}}\\
+   \multicolumn{10}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup

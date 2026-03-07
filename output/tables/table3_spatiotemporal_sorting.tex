@@ -1,0 +1,26 @@
+\begingroup
+\centering
+\begin{tabular}{lcccccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variables: & \multicolumn{3}{c}{mean\_dist} & \multicolumn{3}{c}{log(n\_trips)}\\
+                & Dist(R)  & Dist(E)  & Dist(P)  & Trips(R) & Trips(E) & Trips(P) \\   
+   Model:       & (1)      & (2)      & (3)      & (4)      & (5)      & (6)\\  
+   \midrule
+   \emph{Variables}\\
+   O3\_10       & 0.0053   & 0.0018   & 0.0003   & -0.0137  & 0.0008   & 0.0064\\   
+                & (0.0057) & (0.0031) & (0.0037) & (0.0096) & (0.0058) & (0.0072)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   date         & Yes      & Yes      & Yes      & Yes      & Yes      & Yes\\  
+   zone         & Yes      & Yes      & Yes      & Yes      & Yes      & Yes\\  
+   zone\_month  & Yes      & Yes      & Yes      & Yes      & Yes      & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations & 5,424    & 13,865   & 8,441    & 5,424    & 13,865   & 8,441\\  
+   R$^2$        & 0.92125  & 0.93157  & 0.93252  & 0.99429  & 0.99319  & 0.99242\\  
+   Within R$^2$ & 0.00720  & 0.00257  & 0.00315  & 0.01209  & 0.00515  & 0.00382\\  
+   \midrule \midrule
+   \multicolumn{7}{l}{\emph{Clustered (date) standard-errors in parentheses}}\\
+   \multicolumn{7}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup

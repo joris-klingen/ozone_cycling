@@ -1,0 +1,25 @@
+\begingroup
+\centering
+\begin{tabular}{lccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variables: & mean\_speed     & mean\_dist     & log(n\_trips)\\   
+                        & Speed           & Distance       & log(Trips) \\   
+   Model:               & (1)             & (2)            & (3)\\  
+   \midrule
+   \emph{Variables}\\
+   O3\_10               & -0.0520$^{***}$ & 0.0138$^{***}$ & 0.0369$^{***}$\\   
+                        & (0.0158)        & (0.0039)       & (0.0075)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   date                 & Yes             & Yes            & Yes\\  
+   dow\_hour            & Yes             & Yes            & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations         & 28,696          & 28,696         & 28,696\\  
+   R$^2$                & 0.92337         & 0.89795        & 0.91025\\  
+   Within R$^2$         & 0.24886         & 0.05945        & 0.10810\\  
+   \midrule \midrule
+   \multicolumn{4}{l}{\emph{Clustered (date) standard-errors in parentheses}}\\
+   \multicolumn{4}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup

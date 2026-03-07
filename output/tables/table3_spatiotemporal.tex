@@ -1,0 +1,27 @@
+\begingroup
+\centering
+\begin{tabular}{lcccccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variable: & \multicolumn{6}{c}{mean\_speed}\\
+                & Speed-M(R) & Speed-W(R) & Speed-M(E) & Speed-W(E)     & Speed-M(P) & Speed-W(P) \\   
+   Model:       & (1)        & (2)        & (3)        & (4)            & (5)        & (6)\\  
+   \midrule
+   \emph{Variables}\\
+   O3\_10       & 0.0154     & -0.0292    & -0.0338    & -0.0710$^{**}$ & -0.0491    & -0.0885$^{**}$\\   
+                & (0.0466)   & (0.0504)   & (0.0275)   & (0.0299)       & (0.0342)   & (0.0367)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   date         & Yes        & Yes        & Yes        & Yes            & Yes        & Yes\\  
+   zone         & Yes        & Yes        & Yes        & Yes            & Yes        & Yes\\  
+   zone\_month  & Yes        &            & Yes        &                & Yes        & \\  
+   zone\_week   &            & Yes        &            & Yes            &            & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations & 5,424      & 5,406      & 13,865     & 13,826         & 8,441      & 8,420\\  
+   R$^2$        & 0.95280    & 0.96978    & 0.95881    & 0.97378        & 0.96087    & 0.97517\\  
+   Within R$^2$ & 0.01727    & 0.01316    & 0.00571    & 0.00571        & 0.00539    & 0.00727\\  
+   \midrule \midrule
+   \multicolumn{7}{l}{\emph{Clustered (date) standard-errors in parentheses}}\\
+   \multicolumn{7}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup

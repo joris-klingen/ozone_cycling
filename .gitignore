@@ -47,3 +47,19 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Data (too large for git)
+data/
+
+# LaTeX build artifacts
+tex/*.aux
+tex/*.bbl
+tex/*.blg
+tex/*.log
+tex/*.out
+tex/*.synctex.gz
+tex/*.fdb_latexmk
+tex/*.fls
+
+# Claude settings
+.claude/

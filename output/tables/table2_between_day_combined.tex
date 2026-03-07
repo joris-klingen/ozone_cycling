@@ -1,0 +1,25 @@
+\begingroup
+\centering
+\begin{tabular}{lccccccccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variables: & \multicolumn{3}{c}{mean\_speed} & \multicolumn{3}{c}{mean\_dist} & \multicolumn{3}{c}{log(n\_trips)}\\
+                & Speed (R)       & Speed (E)       & Speed (P)       & Dist (R) & Dist (E) & Dist (P) & Trips (R) & Trips (E)     & Trips (P) \\   
+   Model:       & (1)             & (2)             & (3)             & (4)      & (5)      & (6)      & (7)       & (8)           & (9)\\  
+   \midrule
+   \emph{Variables}\\
+   O3\_10       & -0.2862$^{***}$ & -0.1248$^{***}$ & -0.0840$^{***}$ & 0.0145   & -0.0007  & -0.0064  & 0.0028    & -0.0110$^{*}$ & -0.0170$^{**}$\\   
+                & (0.0592)        & (0.0275)        & (0.0318)        & (0.0100) & (0.0047) & (0.0057) & (0.0110)  & (0.0061)      & (0.0074)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   yearmonth    & Yes             & Yes             & Yes             & Yes      & Yes      & Yes      & Yes       & Yes           & Yes\\  
+   dow          & Yes             & Yes             & Yes             & Yes      & Yes      & Yes      & Yes       & Yes           & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations & 1,199           & 3,234           & 2,035           & 1,199    & 3,234    & 2,035    & 1,199     & 3,234         & 2,035\\  
+   R$^2$        & 0.53903         & 0.68074         & 0.73429         & 0.65359  & 0.84042  & 0.80222  & 0.81558   & 0.77991       & 0.76640\\  
+   Within R$^2$ & 0.29570         & 0.20056         & 0.22054         & 0.14770  & 0.11120  & 0.12200  & 0.48535   & 0.41519       & 0.40285\\  
+   \midrule \midrule
+   \multicolumn{10}{l}{\emph{Clustered (date) standard-errors in parentheses}}\\
+   \multicolumn{10}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup
