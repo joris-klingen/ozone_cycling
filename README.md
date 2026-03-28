@@ -4,20 +4,19 @@ Replication and extension of [Klingen & van Ommeren (2020)](https://doi.org/10.1
 
 ## Paper
 
-The original study estimates the effect of ozone on cycling speed using 42 million London bike-share trips (2013--2017). This repository replicates the analysis and extends the sample to 108 million trips through 2025.
-
 > Klingen, J. and van Ommeren, J.N. (2020). Air pollution and physical effort: Evidence from cyclists in London. *Regional Science and Urban Economics*, 81, 103504.
 
-## Overview
+**Abstract.** We replicate and extend Klingen & van Ommeren (2020), who found that a 10 ppb increase in ozone reduces cycling speed by 0.3--0.4% using 42 million London bike-share trips (2013--2017). Extending the sample to 108 million trips through 2025, we confirm a negative ozone--speed relationship across all four identification strategies (within-day, between-day, spatio-temporal, cyclist panel). Point estimates in the extended and post-2017 samples are at least as large as in the original period, indicating that the effect has not diminished despite substantial changes in London's air quality and cycling landscape---including COVID-19, the Ultra Low Emission Zone expansion, and major cycling infrastructure investments.
 
-Four identification strategies — exploiting within-day, between-day, spatio-temporal, and within-cyclist variation — consistently show that ozone reduces cycling speed. The table below compares the original estimates to our replication and the extended sample.
+## Results
+
+Three identification strategies --- exploiting within-day, spatio-temporal, and within-cyclist variation --- consistently show that ozone reduces cycling speed. The table below compares the original estimates to our replication and the extended sample.
 
 **Effect of ozone on cycling speed (km/h per 10 ppb)**
 
 | Identification strategy | Original (2013--2017) | Replication (2013--2017) | Extension (2013--2025) |
 |---|:---:|:---:|:---:|
 | Within-day | -0.053\*\*\* | -0.072\*\*\* | -0.081\*\*\* |
-| Between-day | -0.083\*\*\* | -0.276\*\*\* | -0.117\*\*\* |
 | Spatio-temporal | -0.044 | -0.031 | -0.074\*\* |
 | Cyclist panel | -0.026\*\*\* | -0.020\*\*\* | -0.022\*\*\* |
 
@@ -27,9 +26,15 @@ Four identification strategies — exploiting within-day, between-day, spatio-te
   <img src="output/figures/comparison_coefficients.png" width="700" alt="Coefficient comparison across estimation strategies">
 </p>
 
-The core finding is confirmed: a 10 ppb increase in ozone reduces average cycling speed by 0.02--0.08 km/h, depending on the identification strategy. Estimates from the extended sample are broadly consistent with the original, and the panel estimates — which control for individual cyclist heterogeneity — are particularly stable across time periods.
+The core finding is confirmed: a 10 ppb increase in ozone reduces average cycling speed by 0.02--0.08 km/h, depending on the identification strategy. Estimates from the extended sample are broadly consistent with the original, and the panel estimates --- which control for individual cyclist heterogeneity --- are particularly stable across time periods.
 
-The between-day replication differs from the original, likely because of differences in car traffic controls (the original used automatic traffic counter data that are no longer publicly available). Weather data also differ: the original used Met Office observations while this replication uses Open-Meteo.
+The between-day strategy is omitted from this comparison because it relies on car traffic controls from automatic traffic counters that are no longer publicly available. Without these controls, the between-day replication produces a substantially larger coefficient (-0.276 vs. the original -0.083), likely reflecting omitted variable bias from traffic congestion. The within-day and panel strategies are less affected because day fixed effects and cyclist fixed effects, respectively, absorb most traffic-related confounding.
+
+The figure below shows the non-linear ozone--speed relationship using 5 ppb ozone bin indicators. All three series display a roughly linear decline, with effects becoming visible around 15--20 ppb --- consistent with the original finding that the threshold is well below regulatory standards. The original coefficients are from the cyclist panel specification; the replication and extension use the within-day specification, which yields larger point estimates.
+
+<p align="center">
+  <img src="output/figures/nonlinearity_comparison.png" width="700" alt="Non-linear ozone effects on cycling speed">
+</p>
 
 ## Data
 
@@ -75,6 +80,7 @@ Rscript R/11a_panel_build.R
 Rscript R/11b_panel_estimate.R
 Rscript R/12_robustness.R
 Rscript R/13_comparison_figure.R
+Rscript R/14_nonlinearity_figure.R
 ```
 
 Results are written to `output/tables/` and `output/figures/`.

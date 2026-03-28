@@ -11,15 +11,13 @@ dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 # Replication and extension: current results from scripts 08-11
 
 coefs <- data.table(
-  strategy = factor(rep(c("Within-day", "Between-day", "Spatio-temporal", "Cyclist panel"), each = 3),
-                    levels = c("Within-day", "Between-day", "Spatio-temporal", "Cyclist panel")),
-  sample = factor(rep(c("Original (2013-2017)", "Replication (2013-2017)", "Extension (2013-2025)"), 4),
+  strategy = factor(rep(c("Within-day", "Spatio-temporal", "Cyclist panel"), each = 3),
+                    levels = c("Within-day", "Spatio-temporal", "Cyclist panel")),
+  sample = factor(rep(c("Original (2013-2017)", "Replication (2013-2017)", "Extension (2013-2025)"), 3),
                   levels = c("Original (2013-2017)", "Replication (2013-2017)", "Extension (2013-2025)")),
   coef = c(
     # Within-day
     -0.053, -0.072, -0.081,
-    # Between-day
-    -0.083, -0.276, -0.117,
     # Spatio-temporal (zone-week FE)
     -0.044, -0.031, -0.074,
     # Cyclist panel (d>=0, t>=4; extension uses d>=2 due to memory constraint)
@@ -28,8 +26,6 @@ coefs <- data.table(
   se = c(
     # Within-day
     0.016, 0.016, 0.010,
-    # Between-day
-    0.025, 0.058, 0.028,
     # Spatio-temporal
     0.050, 0.051, 0.030,
     # Cyclist panel
