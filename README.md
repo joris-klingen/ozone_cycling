@@ -32,6 +32,12 @@ The figure below shows the non-linear ozone--speed relationship using 5 ppb ozon
   <img src="output/figures/nonlinearity_comparison.png" width="700" alt="Non-linear ozone effects on cycling speed">
 </p>
 
+Estimating the within-day model separately for each year shows that the negative ozone effect is present throughout the sample period, with no sign of attenuation. The wide confidence interval in 2021 reflects reduced within-day ozone variation during COVID-19 lockdowns.
+
+<p align="center">
+  <img src="output/figures/yearly_ozone_effect.png" width="700" alt="Ozone effect on cycling speed by year">
+</p>
+
 ## Data
 
 The analysis uses three data sources:
@@ -77,6 +83,7 @@ Rscript R/11b_panel_estimate.R
 Rscript R/12_robustness.R
 Rscript R/13_comparison_figure.R
 Rscript R/14_nonlinearity_figure.R
+Rscript R/15_yearly_effect.R
 ```
 
 Results are written to `output/tables/` and `output/figures/`.
