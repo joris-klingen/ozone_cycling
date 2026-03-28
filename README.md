@@ -1,12 +1,8 @@
 # Urban Air Pollution and Time Losses: Evidence from Cyclists in London — Revisited
 
-Replication and extension of [Klingen & van Ommeren (2020)](https://doi.org/10.1016/j.regsciurbeco.2019.103504), *Regional Science and Urban Economics*.
+[Klingen and van Ommeren (2020)](https://doi.org/10.1016/j.regsciurbeco.2019.103504) showed that ozone pollution reduces cycling speed in London, using 42 million Santander Cycles trips during 2013--2017. A 10 ppb increase in ozone --- roughly the difference between a clean and a moderately polluted day --- reduced average speed by 0.3--0.4%, with effects detectable at concentrations as low as 20 ppb. The paper used four complementary identification strategies to rule out confounding from weather, traffic, and cyclist sorting.
 
-## Paper
-
-> Klingen, J. and van Ommeren, J.N. (2020). Air pollution and physical effort: Evidence from cyclists in London. *Regional Science and Urban Economics*, 81, 103504.
-
-**Abstract.** We replicate and extend Klingen & van Ommeren (2020), who found that a 10 ppb increase in ozone reduces cycling speed by 0.3--0.4% using 42 million London bike-share trips (2013--2017). Extending the sample to 108 million trips through 2025, we confirm a negative ozone--speed relationship across all four identification strategies (within-day, between-day, spatio-temporal, cyclist panel). Point estimates in the extended and post-2017 samples are at least as large as in the original period, indicating that the effect has not diminished despite substantial changes in London's air quality and cycling landscape---including COVID-19, the Ultra Low Emission Zone expansion, and major cycling infrastructure investments.
+This repository extends the analysis to 108 million trips through 2025, tripling the original sample. The code replicates the original estimation and tests whether the ozone--speed relationship persists across a period that includes COVID-19, the Ultra Low Emission Zone expansion, and substantial changes to London's cycling infrastructure. It does.
 
 ## Results
 
