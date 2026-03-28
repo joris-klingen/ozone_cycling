@@ -26,16 +26,16 @@ The core finding is confirmed: a 10 ppb increase in ozone reduces average cyclin
 
 The between-day strategy is omitted from this comparison because it relies on car traffic controls from automatic traffic counters that are no longer publicly available. Without these controls, the between-day replication produces a substantially larger coefficient (-0.276 vs. the original -0.083), likely reflecting omitted variable bias from traffic congestion. The within-day and panel strategies are less affected because day fixed effects and cyclist fixed effects, respectively, absorb most traffic-related confounding.
 
-The figure below shows the non-linear ozone--speed relationship using 5 ppb ozone bin indicators. All three series display a roughly linear decline, with effects becoming visible around 15--20 ppb --- consistent with the original finding that the threshold is well below regulatory standards. The original coefficients are from the cyclist panel specification; the replication and extension use the within-day specification, which yields larger point estimates.
+Using the cyclist panel specification with 5 ppb ozone bin indicators, both the replication and extension samples show a roughly linear decline in speed with increasing ozone, with effects becoming visible around 20 ppb --- consistent with the original finding that the threshold is well below regulatory standards. The extension sample (red) yields tighter confidence intervals due to the larger sample.
 
 <p align="center">
-  <img src="output/figures/nonlinearity_comparison.png" width="700" alt="Non-linear ozone effects on cycling speed">
+  <img src="output/figures/panel_nonlinearity.png" width="700" alt="Non-linear ozone effects on cycling speed (panel)">
 </p>
 
-Estimating the within-day model separately for each year shows that the negative ozone effect is present throughout the sample period, with no sign of attenuation. The wide confidence interval in 2021 reflects reduced within-day ozone variation during COVID-19 lockdowns.
+Estimating the panel model separately for each year shows that the negative ozone effect is present throughout most of the sample period. The 2021 outlier likely reflects compositional changes in the cycling population during COVID-19 lockdowns.
 
 <p align="center">
-  <img src="output/figures/yearly_ozone_effect.png" width="700" alt="Ozone effect on cycling speed by year">
+  <img src="output/figures/panel_yearly_effect.png" width="700" alt="Ozone effect on cycling speed by year (panel)">
 </p>
 
 ## Data
@@ -84,6 +84,7 @@ Rscript R/12_robustness.R
 Rscript R/13_comparison_figure.R
 Rscript R/14_nonlinearity_figure.R
 Rscript R/15_yearly_effect.R
+Rscript R/16_panel_figures.R
 ```
 
 Results are written to `output/tables/` and `output/figures/`.
