@@ -40,24 +40,30 @@ periods <- list(
 
 weather_controls <- paste0(
   "factor(temp_bin) + pressure + humidity + rain_total + ",
-  "factor(radiation_bin) + radiation:temp_mean + wind_speed"
+  "factor(radiation_bin) + radiation:temp_mean + wind_speed + ",
+  "temp_lag1d + rain_lag1d"
 )
 
 pollutant_controls <- "SO2 + factor(nox_bin) + factor(pm25_bin)"
 
-# Between-day: speed ~ O3/10 + weather + pollutants | yearmonth + dow
+cycling_volume <- "log_sum_dist"
+
+# Between-day: speed ~ O3/10 + weather + pollutants + cycling_vol | yearmonth + dow
 fml_speed <- as.formula(paste0(
   "mean_speed ~ O3_10 + ", weather_controls, " + ", pollutant_controls,
+  " + ", cycling_volume,
   " | yearmonth + dow"
 ))
 
 fml_dist <- as.formula(paste0(
   "mean_dist ~ O3_10 + ", weather_controls, " + ", pollutant_controls,
+  " + ", cycling_volume,
   " | yearmonth + dow"
 ))
 
 fml_trips <- as.formula(paste0(
   "log(n_trips) ~ O3_10 + ", weather_controls, " + ", pollutant_controls,
+  " + ", cycling_volume,
   " | yearmonth + dow"
 ))
 

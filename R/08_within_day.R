@@ -32,8 +32,8 @@ for (lag_h in 1:8) {
   hourly[, (bin_col) := fifelse(get(lag_col) > 0, 1L, 0L)]
 }
 
-# Day-of-week x hour interaction
-hourly[, dow_hour := paste0(dow, "_", hour)]
+# Day-of-week x hour x daylight interaction (matches original WkHourDaylight FE)
+hourly[, dow_hour_daylight := paste0(dow, "_", hour, "_", daylight)]
 
 # Year-month for between-day
 hourly[, yearmonth := paste0(year, "_", sprintf("%02d", month))]
@@ -61,20 +61,25 @@ weather_controls <- paste0(
 
 pollutant_controls <- "SO2 + factor(nox_bin) + factor(pm25_bin)"
 
-# Within-day formula: speed ~ O3/10 + weather + pollutants | date + dow^hour
+cycling_volume <- "log_sum_dist"
+
+# Within-day formula: speed ~ O3/10 + weather + pollutants + cycling_vol | date + dow_hour_daylight
 fml_speed <- as.formula(paste0(
   "mean_speed ~ O3_10 + ", weather_controls, " + ", pollutant_controls,
-  " | date + dow_hour"
+  " + ", cycling_volume,
+  " | date + dow_hour_daylight"
 ))
 
 fml_dist <- as.formula(paste0(
   "mean_dist ~ O3_10 + ", weather_controls, " + ", pollutant_controls,
-  " | date + dow_hour"
+  " + ", cycling_volume,
+  " | date + dow_hour_daylight"
 ))
 
 fml_trips <- as.formula(paste0(
   "log(n_trips) ~ O3_10 + ", weather_controls, " + ", pollutant_controls,
-  " | date + dow_hour"
+  " + ", cycling_volume,
+  " | date + dow_hour_daylight"
 ))
 
 # Run regressions ----

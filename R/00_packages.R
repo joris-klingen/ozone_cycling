@@ -9,7 +9,8 @@ pkgs <- c(
   "ggplot2",
   "gridExtra",
   "lubridate",
-  "sf"
+  "sf",
+  "suncalc"
 )
 
 for (pkg in pkgs) {

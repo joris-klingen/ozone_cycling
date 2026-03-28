@@ -19,10 +19,18 @@ cat("Unique pseudo-cyclists:", uniqueN(panel$cyclist_set), "\n")
 
 # Merge environment data ----
 
+# Also load city-level hourly data for cycling volume
+hourly_city <- as.data.table(read_parquet(file.path(proc_dir, "analysis_hourly.parquet")))
+hourly_city <- hourly_city[, .(date, hour, log_sum_dist)]
+
 panel <- merge(panel, env_h,
                by.x = c("date", "hour"),
                by.y = c("date", "hour"),
                all.x = TRUE, suffixes = c("", "_env"))
+
+# Merge cycling volume
+panel <- merge(panel, hourly_city, by = c("date", "hour"), all.x = TRUE)
+rm(hourly_city)
 
 rm(env_h); gc(verbose = FALSE)
 
@@ -68,8 +76,11 @@ weather_controls <- paste0(
 
 pollutant_controls <- "factor(nox_bin) + PM25 + SO2"
 
+cycling_volume <- "log_sum_dist + bank_holiday"
+
 fml <- as.formula(paste0(
   "speed_kmh ~ O3_10 + ", weather_controls, " + ", pollutant_controls,
+  " + ", cycling_volume,
   " | cyclist_set + dow"
 ))
 

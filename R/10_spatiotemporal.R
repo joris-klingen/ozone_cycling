@@ -16,12 +16,17 @@ zone_h[, month := month(date)]
 zone_h[, week := isoweek(date)]
 
 zone_daily <- zone_h[, .(
-  mean_speed = weighted.mean(mean_speed, n_trips, na.rm = TRUE),
-  mean_dist  = weighted.mean(mean_dist, n_trips, na.rm = TRUE),
-  n_trips    = sum(n_trips),
-  O3         = mean(O3, na.rm = TRUE),
-  NOx        = mean(NOx, na.rm = TRUE),
-  NO2        = mean(NO2, na.rm = TRUE)
+  mean_speed   = weighted.mean(mean_speed, n_trips, na.rm = TRUE),
+  mean_dist    = weighted.mean(mean_dist, n_trips, na.rm = TRUE),
+  n_trips      = sum(n_trips),
+  O3           = mean(O3, na.rm = TRUE),
+  NOx          = mean(NOx, na.rm = TRUE),
+  NO2          = mean(NO2, na.rm = TRUE),
+  temp_mean    = mean(temperature_2m, na.rm = TRUE),
+  rain_total   = sum(rain, na.rm = TRUE),
+  wind_speed   = mean(wind_speed_10m, na.rm = TRUE),
+  pressure     = mean(surface_pressure, na.rm = TRUE),
+  radiation    = mean(shortwave_radiation, na.rm = TRUE)
 ), by = .(zone, date, year, dow, month, week)]
 
 # Replace NaN with NA
@@ -35,6 +40,8 @@ for (col in names(zone_daily)) {
 
 zone_daily[, O3_10 := O3 / 10]
 zone_daily[, nox_bin := floor(NOx / 10) * 10]
+zone_daily[, temp_bin := floor(temp_mean / 2.5) * 2.5]
+zone_daily[, radiation_bin := floor(radiation / 100) * 100]
 zone_daily[, yearmonth := paste0(year, "_", sprintf("%02d", month))]
 zone_daily[, yearweek := paste0(year, "_", sprintf("%02d", week))]
 zone_daily[, zone_month := paste0(zone, "_", yearmonth)]
@@ -64,37 +71,43 @@ for (pname in names(periods)) {
   cat("  Observations:", nrow(dt), "\n")
   cat("  Zones:", length(unique(dt$zone)), "\n")
 
-  # Spec 1: day + zone + zone-month FE
+  # Spec 1: day + zone + zone-month FE + weather controls
   m1_speed <- fixest::feols(
-    mean_speed ~ O3_10 + factor(nox_bin) | date + zone + zone_month,
+    mean_speed ~ O3_10 + factor(nox_bin) + factor(temp_bin) + rain_total +
+      wind_speed + factor(radiation_bin) | date + zone + zone_month,
     data = dt, weights = ~n_trips, cluster = ~date, lean = TRUE
   )
   cat("  Spec1 speed coef:", coef(m1_speed)["O3_10"], "\n")
 
   m1_dist <- fixest::feols(
-    mean_dist ~ O3_10 + factor(nox_bin) | date + zone + zone_month,
+    mean_dist ~ O3_10 + factor(nox_bin) + factor(temp_bin) + rain_total +
+      wind_speed + factor(radiation_bin) | date + zone + zone_month,
     data = dt, weights = ~n_trips, cluster = ~date, lean = TRUE
   )
 
   m1_trips <- fixest::feols(
-    log(n_trips) ~ O3_10 + factor(nox_bin) | date + zone + zone_month,
+    log(n_trips) ~ O3_10 + factor(nox_bin) + factor(temp_bin) + rain_total +
+      wind_speed + factor(radiation_bin) | date + zone + zone_month,
     data = dt, weights = ~n_trips, cluster = ~date, lean = TRUE
   )
 
-  # Spec 2: day + zone + zone-week FE
+  # Spec 2: day + zone + zone-week FE + weather controls
   m2_speed <- fixest::feols(
-    mean_speed ~ O3_10 + factor(nox_bin) | date + zone + zone_week,
+    mean_speed ~ O3_10 + factor(nox_bin) + factor(temp_bin) + rain_total +
+      wind_speed + factor(radiation_bin) | date + zone + zone_week,
     data = dt, weights = ~n_trips, cluster = ~date, lean = TRUE
   )
   cat("  Spec2 speed coef:", coef(m2_speed)["O3_10"], "\n")
 
   m2_dist <- fixest::feols(
-    mean_dist ~ O3_10 + factor(nox_bin) | date + zone + zone_week,
+    mean_dist ~ O3_10 + factor(nox_bin) + factor(temp_bin) + rain_total +
+      wind_speed + factor(radiation_bin) | date + zone + zone_week,
     data = dt, weights = ~n_trips, cluster = ~date, lean = TRUE
   )
 
   m2_trips <- fixest::feols(
-    log(n_trips) ~ O3_10 + factor(nox_bin) | date + zone + zone_week,
+    log(n_trips) ~ O3_10 + factor(nox_bin) + factor(temp_bin) + rain_total +
+      wind_speed + factor(radiation_bin) | date + zone + zone_week,
     data = dt, weights = ~n_trips, cluster = ~date, lean = TRUE
   )
 

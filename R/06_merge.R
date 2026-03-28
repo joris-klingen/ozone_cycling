@@ -133,6 +133,10 @@ hourly_trips[, `:=`(
 
 hourly <- merge(hourly_trips, env_h, by = c("date", "hour"), all.x = TRUE)
 
+# Compute city-level cycling volume (total distance, log scale) ----
+# Used as control for bicycle traffic / congestion, following original paper
+hourly[, log_sum_dist := log(sum_dist + 1)]
+
 cat("Hourly analysis dataset:", nrow(hourly), "obs\n")
 write_parquet(hourly, file.path(proc_dir, "analysis_hourly.parquet"))
 
@@ -156,6 +160,9 @@ daily_trips[, `:=`(
 )]
 
 daily <- merge(daily_trips, env_d, by = "date", all.x = TRUE)
+
+# Daily cycling volume
+daily[, log_sum_dist := log(sum_dist + 1)]
 
 cat("Daily analysis dataset:", nrow(daily), "obs\n")
 write_parquet(daily, file.path(proc_dir, "analysis_daily.parquet"))

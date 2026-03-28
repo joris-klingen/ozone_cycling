@@ -23,7 +23,7 @@ for (lag_h in 1:8) {
   hourly[, paste0("temp_lag", lag_h, "_bin") := floor(get(paste0("temp_lag", lag_h)))]
   hourly[, paste0("rain_lag", lag_h, "_bin") := fifelse(get(paste0("rain_lag", lag_h)) > 0, 1L, 0L)]
 }
-hourly[, dow_hour := paste0(dow, "_", hour)]
+hourly[, dow_hour_daylight := paste0(dow, "_", hour, "_", daylight)]
 
 daily[, O3_10 := O3 / 10]
 daily[, temp_bin := floor(temp_mean / 2.5) * 2.5]
@@ -54,20 +54,24 @@ wx_hourly <- paste0(
 )
 
 poll_hourly <- "SO2 + factor(nox_bin) + factor(pm25_bin)"
+vol_hourly <- "log_sum_dist"
 
-wx_daily <- "factor(temp_bin) + pressure + humidity + rain_total + factor(radiation_bin) + radiation:temp_mean + wind_speed"
+wx_daily <- "factor(temp_bin) + pressure + humidity + rain_total + factor(radiation_bin) + radiation:temp_mean + wind_speed + temp_lag1d + rain_lag1d"
 poll_daily <- "SO2 + factor(nox_bin) + factor(pm25_bin)"
+vol_daily <- "log_sum_dist"
 
 # Robustness 1: Median speed as DV ----
 
 cat("=== Robustness: Median speed ===\n")
 
 fml_median_wd <- as.formula(paste0(
-  "median_speed ~ O3_10 + ", wx_hourly, " + ", poll_hourly, " | date + dow_hour"
+  "median_speed ~ O3_10 + ", wx_hourly, " + ", poll_hourly, " + ", vol_hourly,
+  " | date + dow_hour_daylight"
 ))
 
 fml_median_bd <- as.formula(paste0(
-  "median_speed ~ O3_10 + ", wx_daily, " + ", poll_daily, " | yearmonth + dow"
+  "median_speed ~ O3_10 + ", wx_daily, " + ", poll_daily, " + ", vol_daily,
+  " | yearmonth + dow"
 ))
 
 for (pname in names(periods)) {
@@ -109,8 +113,8 @@ for (pname in names(periods)) {
   ))]
 
   fml_nonlin <- as.formula(paste0(
-    "mean_speed ~ factor(o3_5ppb) + ", wx_hourly, " + ", poll_hourly,
-    " | date + dow_hour"
+    "mean_speed ~ factor(o3_5ppb) + ", wx_hourly, " + ", poll_hourly, " + ", vol_hourly,
+    " | date + dow_hour_daylight"
   ))
 
   m <- fixest::feols(fml_nonlin, data = dt, weights = ~n_trips,
@@ -176,8 +180,8 @@ for (pname in names(periods)) {
   lag_lead_str <- paste(lag_lead_vars, collapse = " + ")
 
   fml_ll <- as.formula(paste0(
-    "mean_speed ~ ", lag_lead_str, " + ", wx_hourly, " + ", poll_hourly,
-    " | date + dow_hour"
+    "mean_speed ~ ", lag_lead_str, " + ", wx_hourly, " + ", poll_hourly, " + ", vol_hourly,
+    " | date + dow_hour_daylight"
   ))
 
   m <- tryCatch(
@@ -244,7 +248,8 @@ for (pname in names(periods)) {
   dt <- merge(dt, monthly_speed[, .(month_key, fitness)], by = "month_key")
 
   fml_wd <- as.formula(paste0(
-    "mean_speed ~ O3_10 + ", wx_hourly, " + ", poll_hourly, " | date + dow_hour"
+    "mean_speed ~ O3_10 + ", wx_hourly, " + ", poll_hourly, " + ", vol_hourly,
+    " | date + dow_hour_daylight"
   ))
 
   for (fit in c("low", "mid", "high")) {
