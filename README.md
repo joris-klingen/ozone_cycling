@@ -19,7 +19,7 @@ Four identification strategies — exploiting within-day, between-day, spatio-te
 | Within-day | -0.053\*\*\* | -0.072\*\*\* | -0.081\*\*\* |
 | Between-day | -0.083\*\*\* | -0.276\*\*\* | -0.117\*\*\* |
 | Spatio-temporal | -0.044 | -0.031 | -0.074\*\* |
-| Cyclist panel | -0.026\*\*\* | -0.020\*\*\* | -0.026\*\*\* |
+| Cyclist panel | -0.026\*\*\* | -0.020\*\*\* | -0.022\*\*\* |
 
 \*\*\* p<0.01, \*\* p<0.05
 

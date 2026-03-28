@@ -22,8 +22,8 @@ coefs <- data.table(
     -0.083, -0.276, -0.117,
     # Spatio-temporal (zone-week FE)
     -0.044, -0.031, -0.074,
-    # Cyclist panel (d>=0, t>=4)
-    -0.026, -0.020, -0.026
+    # Cyclist panel (d>=0, t>=4; extension uses d>=2 due to memory constraint)
+    -0.026, -0.020, -0.022
   ),
   se = c(
     # Within-day
