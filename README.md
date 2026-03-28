@@ -6,17 +6,17 @@ This repository extends the analysis to 108 million trips through 2025, tripling
 
 ## Results
 
-The within-day specification exploits hourly ozone variation within a given day, controlling for day fixed effects, day-of-week-by-hour-by-daylight fixed effects, flexible weather controls, and other pollutants. The table below compares the original estimate to our replication and the extended sample.
+The table below compares the original estimates to our replication and the extended sample across three identification strategies.
 
-**Effect of ozone on cycling speed (km/h per 10 ppb), within-day estimation**
+**Effect of ozone on cycling speed (km/h per 10 ppb)**
 
-| Sample | Coefficient | SE | N |
+| Identification strategy | Original (2013--2017) | Replication (2013--2017) | Extension (2013--2025) |
 |---|:---:|:---:|:---:|
-| Original (2013--2017) | -0.053\*\*\* | (0.016) | ~40,000 |
-| Replication (2013--2017) | -0.072\*\*\* | (0.016) | 28,692 |
-| Extension (2013--2025) | -0.081\*\*\* | (0.010) | 76,454 |
+| Within-day | -0.053\*\*\* | -0.072\*\*\* | -0.081\*\*\* |
+| Spatio-temporal | -0.044 | -0.031 | -0.074\*\* |
+| Cyclist panel (d>4km) | -0.026\*\*\* | -0.020\*\*\* | -0.022\*\*\* |
 
-\*\*\* p<0.01
+\*\*\* p<0.01, \*\* p<0.05
 
 Using 5 ppb ozone bin indicators, both the replication and extension samples show a roughly linear decline in speed with increasing ozone, with effects becoming visible around 15--20 ppb --- consistent with the original finding that the threshold is well below regulatory standards.
 
