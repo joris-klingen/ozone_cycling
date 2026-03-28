@@ -6,36 +6,28 @@ This repository extends the analysis to 108 million trips through 2025, tripling
 
 ## Results
 
-Three identification strategies --- exploiting within-day, spatio-temporal, and within-cyclist variation --- consistently show that ozone reduces cycling speed. The table below compares the original estimates to our replication and the extended sample.
+The within-day specification exploits hourly ozone variation within a given day, controlling for day fixed effects, day-of-week-by-hour-by-daylight fixed effects, flexible weather controls, and other pollutants. The table below compares the original estimate to our replication and the extended sample.
 
-**Effect of ozone on cycling speed (km/h per 10 ppb)**
+**Effect of ozone on cycling speed (km/h per 10 ppb), within-day estimation**
 
-| Identification strategy | Original (2013--2017) | Replication (2013--2017) | Extension (2013--2025) |
+| Sample | Coefficient | SE | N |
 |---|:---:|:---:|:---:|
-| Within-day | -0.053\*\*\* | -0.072\*\*\* | -0.081\*\*\* |
-| Spatio-temporal | -0.044 | -0.031 | -0.074\*\* |
-| Cyclist panel | -0.026\*\*\* | -0.020\*\*\* | -0.022\*\*\* |
+| Original (2013--2017) | -0.053\*\*\* | (0.016) | ~40,000 |
+| Replication (2013--2017) | -0.072\*\*\* | (0.016) | 28,692 |
+| Extension (2013--2025) | -0.081\*\*\* | (0.010) | 76,454 |
 
-\*\*\* p<0.01, \*\* p<0.05
+\*\*\* p<0.01
+
+Using 5 ppb ozone bin indicators, both the replication and extension samples show a roughly linear decline in speed with increasing ozone, with effects becoming visible around 15--20 ppb --- consistent with the original finding that the threshold is well below regulatory standards.
 
 <p align="center">
-  <img src="output/figures/comparison_coefficients.png" width="700" alt="Coefficient comparison across estimation strategies">
+  <img src="output/figures/nonlinearity_comparison.png" width="700" alt="Non-linear ozone effects on cycling speed">
 </p>
 
-The core finding is confirmed: a 10 ppb increase in ozone reduces average cycling speed by 0.02--0.08 km/h, depending on the identification strategy. Estimates from the extended sample are broadly consistent with the original, and the panel estimates --- which control for individual cyclist heterogeneity --- are particularly stable across time periods.
-
-The between-day strategy is omitted from this comparison because it relies on car traffic controls from automatic traffic counters that are no longer publicly available. Without these controls, the between-day replication produces a substantially larger coefficient (-0.276 vs. the original -0.083), likely reflecting omitted variable bias from traffic congestion. The within-day and panel strategies are less affected because day fixed effects and cyclist fixed effects, respectively, absorb most traffic-related confounding.
-
-Using the cyclist panel specification with 5 ppb ozone bin indicators, both the replication and extension samples show a roughly linear decline in speed with increasing ozone, with effects becoming visible around 20 ppb --- consistent with the original finding that the threshold is well below regulatory standards. The extension sample (red) yields tighter confidence intervals due to the larger sample.
+Estimating the model separately for each year shows that the negative ozone effect is present throughout the sample period, with no sign of attenuation. The wide confidence interval in 2021 reflects reduced within-day ozone variation during COVID-19 lockdowns.
 
 <p align="center">
-  <img src="output/figures/panel_nonlinearity.png" width="700" alt="Non-linear ozone effects on cycling speed (panel)">
-</p>
-
-Estimating the panel model separately for each year shows that the negative ozone effect is present throughout most of the sample period. The 2021 outlier likely reflects compositional changes in the cycling population during COVID-19 lockdowns.
-
-<p align="center">
-  <img src="output/figures/panel_yearly_effect.png" width="700" alt="Ozone effect on cycling speed by year (panel)">
+  <img src="output/figures/yearly_ozone_effect.png" width="700" alt="Ozone effect on cycling speed by year">
 </p>
 
 ## Data
